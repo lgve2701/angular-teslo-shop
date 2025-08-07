@@ -14,7 +14,7 @@ export class ProductImagePipe implements PipeTransform{
         // string = string
         if (typeof value == 'string'){
             const img = `${imgUrlBase}${value}`; 
-            console.log('Producto; valor concatenado: ', img)
+            //console.log('Producto; valor concatenado: ', img)
             return img;
         }
 
