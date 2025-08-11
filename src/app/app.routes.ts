@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { IsAdminGuard } from '@auth/guards/is-admin.guard';
 import { NotAuthenticatedGuard } from '@auth/guards/not-authenticated.guard';
 
 export const routes: Routes = [
@@ -11,11 +12,18 @@ export const routes: Routes = [
             /*() => {
                 // tambien se puede crear una funcion que funcione como guarda
                 // y aqui se pueden injectar servicios
-                console.log('The world is yours! - app.routes.ts_canMatch_GuardFunction');
+                //console.log('The world is yours! - app.routes.ts_canMatch_GuardFunction');
                 return false; //al regresar FALSE, ya no redirecciona a 'auth' y lo envia al "not-found-page"
             } */
         ]        
 
+    },
+    {
+        path: 'admin',
+        loadChildren: () => import('./admin-dashboard/admin-dashboard.routes'),
+        canMatch:[
+            IsAdminGuard,
+        ],
     },
     {
         path: '',

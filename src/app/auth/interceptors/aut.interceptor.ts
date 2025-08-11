@@ -12,7 +12,7 @@ export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn) 
   const token = inject(AuthService).token();
 
   //-- aqui se puede filtrar para solo ciertas url intercepten el token --//
-  console.log({token});
+  //console.log({token});
   
   // Clone the request to add the authentication header.
   const newReq = req.clone({

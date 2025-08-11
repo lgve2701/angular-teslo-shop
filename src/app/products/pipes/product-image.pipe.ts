@@ -10,7 +10,18 @@ const imgUrlBase = environment.imgUrlBase
 
 export class ProductImagePipe implements PipeTransform{
 
-    transform(value: string | string[]): string {
+    transform(value: null | string | string[]): string {
+        //console.log({value});
+
+        if (value == null){
+            return './assets/images/no-image.jpg';
+        }
+
+        //string con 'blob' por que son locales
+        if (typeof value == 'string' && value.startsWith('blob')){
+            return value;
+        }
+
         // string = string
         if (typeof value == 'string'){
             const img = `${imgUrlBase}${value}`; 

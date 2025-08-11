@@ -20,6 +20,7 @@ export class AuthService{
     private _authStatus = signal<AuthStatus>('checking');
     private _user = signal<User|null>(null);
     private _token = signal<string|null>(localStorage.getItem('token'));
+    private _isAdmin = signal<boolean>(false);
 
     private http = inject(HttpClient);
 
@@ -40,6 +41,7 @@ export class AuthService{
 
     user = computed(() => this._user()); //user = computed<User|null>(() => this._user());  <-- tambien puede realizarse implicando el tipo de la interfaz de usuario --//
     token = computed(this._token);
+    isAdmin = computed(this._isAdmin);
 
     login(email: string, password: string):Observable<boolean> {
         return this.http.post<AuthResponse>(`${baseUrl}/auth/login`,{
@@ -66,7 +68,6 @@ export class AuthService{
             map(resp => this.handleAuthSuccess(resp)),
             catchError((error: any) => this.handleAuthError(error))
         );
-
     }
 
     logout(){
@@ -83,6 +84,7 @@ export class AuthService{
         this._authStatus.set('authenticated');
         this._token.set(resp.token);
         localStorage.setItem('token', resp.token);
+        this._isAdmin.set(this._user()?.roles.includes('admin') ?? false); //esto se podria mantener en cache, pero seria seguro?
 
         return true;
     }

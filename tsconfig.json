@@ -10,6 +10,7 @@
       "@shared/*": ["./src/app/shared/*"],
       "@store-front/*": ["./src/app/store-front/*"],
       "@dashboard/*": ["./src/app/dashboard/*"],
+      "@utils/*": ["./src/app/utils/*"],
       /*"@/*": ["./src/app/*"], <-- dejar esto, cada vez que importe algo, agrega @/products por ejemplo, dejando obsoletos los demas alias*/
     },
     "strict": true,
