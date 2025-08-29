@@ -32,6 +32,8 @@ export class ProductsService{
 
     private http = inject(HttpClient);
 
+    //TanStack Query - https://tanstack.com/query/latest/docs/framework/angular/overview
+    //libreria que ayuda a manejar peticiones, cache y async
     private productsCache = new Map<string, ProductsResponse>();
     private productCache = new Map<String, Product>();
 
